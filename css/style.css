@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "ShareTechMono";
   letter-spacing: 0.125em;
@@ -14,13 +15,10 @@ html {
   color: rgba(238, 238, 238, 0.815);
   font-family: ShareTechMono;
   background-image: url(../img/grid.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center;
 }
 
 header {
-  top: 0;
-  z-index: 1;
   background-color: rgba(44, 44, 44, 0.7);
   margin-bottom: 70px;
 }
@@ -28,15 +26,8 @@ header {
 .warning {
   display: inline;
   font-size: 15px;
-  text-align: right;
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-name: textflicker;
-          animation-name: textflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 1s textflicker infinite normal;
+          animation: 1s textflicker infinite normal;
   border-bottom: 1px solid rgba(238, 238, 238, 0.815);
 }
 
@@ -52,6 +43,153 @@ body {
   margin: 0 auto;
 }
 
+/*********************************
+    SPLASH SCREEN
+*********************************/
+.commandstyle {
+  color: rgba(238, 238, 238, 0.815);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  -webkit-animation: 0.1s commandflicker infinite normal;
+          animation: 0.1s commandflicker infinite normal;
+}
+
+@-webkit-keyframes commandflicker {
+  0% {
+    text-shadow: 0.5px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  100% {
+    text-shadow: 1.5px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+}
+
+@keyframes commandflicker {
+  0% {
+    text-shadow: 0.5px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  100% {
+    text-shadow: 1.5px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+}
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: #111;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: 1s opacity;
+}
+
+#splash.loaded {
+  -webkit-animation: 0.5s loaded forwards linear;
+          animation: 0.5s loaded forwards linear;
+  will-change: transform, opacity, visibility;
+}
+
+@-webkit-keyframes loaded {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
+
+@keyframes loaded {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
+#loading {
+  position: relative;
+  top: 25%;
+  background-color: rgba(44, 44, 44, 0.7);
+  padding: 30px;
+}
+
+#loadingbox {
+  visibility: hidden;
+  --x-gradient: linear-gradient(90deg, rgb(238, 238, 238) 0 10px, transparent 0 calc(100% - 10px), rgb(238, 238, 238) calc(100% - 10px));
+  --y-gradient: linear-gradient(rgb(238, 238, 238) 0 7px, transparent 0 calc(100% - 7px), rgb(238, 238, 238) calc(100% - 7px));
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1;
+  background-image: var(--x-gradient), var(--y-gradient), var(--x-gradient), var(--y-gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
+  background-position: top, right, bottom, left;
+  filter: drop-shadow(1px 0 0 rgba(0, 255, 242, 0.5137254902)) drop-shadow(-1px 0 0 rgba(255, 0, 55, 0.5137254902));
+  -webkit-animation: 1s boxflicker infinite normal;
+          animation: 1s boxflicker infinite normal;
+  will-change: filter;
+}
+
+#loadingline {
+  position: relative;
+  height: 15px;
+  background-color: rgba(238, 238, 238, 0.815);
+}
+
+.loadingline2::before {
+  content: "";
+  position: absolute;
+  height: 15px;
+  background-color: rgb(23, 180, 154);
+  -webkit-animation: 5s fullexpand forwards normal;
+          animation: 5s fullexpand forwards normal;
+}
+
+@-webkit-keyframes fullexpand {
+  0% {
+    width: 0px;
+  }
+  40% {
+    width: 30%;
+  }
+  80% {
+    width: 80%;
+  }
+  90% {
+    width: 85%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fullexpand {
+  0% {
+    width: 0px;
+  }
+  40% {
+    width: 30%;
+  }
+  80% {
+    width: 80%;
+  }
+  90% {
+    width: 85%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+/*********************************
+	コンテンツ
+*********************************/
 .content {
   max-width: 1500px;
   margin: 0 auto;
@@ -88,26 +226,22 @@ body {
 }
 
 .title {
-  padding: 1em 3em;
+  padding: 2rem 6rem;
 }
 
 .glitchtitle {
+  overflow: scroll;
   display: inline;
   background-color: rgb(23, 180, 154);
   color: rgba(238, 238, 238, 0.815);
-  font-size: 2em;
+  font-size: 3.5rem;
   font-weight: bold;
   line-height: 1;
   text-shadow: 0.06rem 0 0.06rem rgba(0, 255, 242, 0.5137254902), -0.125rem 0 0.06rem rgba(255, 0, 55, 0.5137254902);
   letter-spacing: 0.125em;
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-name: textflicker;
-          animation-name: textflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 1s textflicker infinite normal;
+          animation: 1s textflicker infinite normal;
+  will-change: text-shadow;
 }
 
 .glitchtitle span {
@@ -115,14 +249,9 @@ body {
 }
 
 .blink {
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-name: textblinking;
-          animation-name: textblinking;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
-          animation-direction: alternate;
+  -webkit-animation: 0.5s textblinking infinite alternate;
+          animation: 0.5s textblinking infinite alternate;
+  will-change: opacity;
 }
 
 @-webkit-keyframes textflicker {
@@ -239,14 +368,8 @@ body {
   transition: 0.3s;
   letter-spacing: 0.125em;
   color: rgba(238, 238, 238, 0.815);
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-name: textflicker;
-          animation-name: textflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 1s textflicker infinite normal;
+          animation: 1s textflicker infinite normal;
 }
 
 .nav-item a::before {
@@ -263,14 +386,8 @@ body {
   transform-origin: right top;
   transition: transform 0.3s;
   z-index: -1;
-  -webkit-animation-duration: 0.01s;
-          animation-duration: 0.01s;
-  -webkit-animation-name: textblinking;
-          animation-name: textblinking;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 0.01s textblinking infinite normal;
+          animation: 0.01s textblinking infinite normal;
 }
 
 .nav-item a:hover {
@@ -298,26 +415,15 @@ body {
   background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
   background-position: top, right, bottom, left;
   filter: drop-shadow(1px 0 0 rgba(0, 255, 242, 0.5137254902)) drop-shadow(-1px 0 0 rgba(255, 0, 55, 0.5137254902));
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-name: boxflicker;
-          animation-name: boxflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 1s boxflicker infinite normal;
+          animation: 1s boxflicker infinite normal;
+  will-change: filter;
 }
 
 .glitchbox p {
   background-color: rgb(23, 180, 154);
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-name: textflicker;
-          animation-name: textflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 1s textflicker infinite normal;
+          animation: 1s textflicker infinite normal;
 }
 
 @-webkit-keyframes boxflicker {
@@ -397,14 +503,9 @@ body {
   width: 65px;
   height: 65px;
   letter-spacing: 0.125em;
-  -webkit-animation-duration: 1.2s;
-          animation-duration: 1.2s;
-  -webkit-animation-name: crossflicker;
-          animation-name: crossflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
-          animation-direction: alternate;
+  -webkit-animation: 1.2s crossflicker infinite alternate;
+          animation: 1.2s crossflicker infinite alternate;
+  will-change: filter;
 }
 
 @-webkit-keyframes crossflicker {
@@ -493,31 +594,80 @@ body {
   padding: 10px;
   border: 1px solid rgba(238, 238, 238, 0.815);
   border-top: 30px solid rgba(238, 238, 238, 0.815);
-  -webkit-animation-duration: 0.01s;
-          animation-duration: 0.01s;
-  -webkit-animation-name: objectflicker;
-          animation-name: objectflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 0.1s objectflicker infinite normal;
+          animation: 0.1s objectflicker infinite normal;
+  will-change: box-shadow;
 }
 
 @-webkit-keyframes objectflicker {
   0% {
-    box-shadow: 1px 1px 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  10% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  20% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  30% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  40% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  50% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  60% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  70% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  80% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  90% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
   }
   100% {
-    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+    box-shadow: 6px 2px 2px rgba(0, 255, 242, 0.5137254902), -6px -2px 2px rgba(255, 0, 55, 0.5137254902);
   }
 }
 
 @keyframes objectflicker {
   0% {
-    box-shadow: 1px 1px 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  10% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  20% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  30% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  40% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  50% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  60% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  70% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+  }
+  80% {
+    box-shadow: 1px 0 0 rgba(0, 255, 242, 0.5137254902), -2px 0 0 rgba(255, 0, 55, 0.5137254902);
+  }
+  90% {
+    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
   }
   100% {
-    box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
+    box-shadow: 6px 2px 2px rgba(0, 255, 242, 0.5137254902), -6px -2px 2px rgba(255, 0, 55, 0.5137254902);
   }
 }
 .profile {
@@ -535,7 +685,6 @@ body {
 }
 
 .myface {
-  position: relative;
   width: 300px;
   height: 300px;
   border: 1px solid rgba(238, 238, 238, 0.815);
@@ -547,13 +696,12 @@ body {
   border-left: 10px solid rgba(238, 238, 238, 0.815);
   padding-left: 10px;
   margin-bottom: 17.5px;
-  background-color: rgba(0, 255, 242, 0.5137254902);
+  background-color: rgb(23, 180, 154);
   text-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
   box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
 }
 
 .profiletext {
-  display: inline-block;
   font-family: UDEVGothic;
   letter-spacing: 0.125em;
   text-shadow: 0 0 3px rgba(238, 238, 238, 0.815);
@@ -595,7 +743,7 @@ body {
   border-right: 100px solid rgba(238, 238, 238, 0.815);
   border-left: 10px solid rgba(238, 238, 238, 0.815);
   padding-left: 10px;
-  background-color: rgba(0, 255, 242, 0.5137254902);
+  background-color: rgb(23, 180, 154);
   text-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px rgba(255, 0, 55, 0.5137254902);
   box-shadow: 3px 0.5px 1px rgba(0, 255, 242, 0.5137254902), -2px -0.5px 1px;
 }
@@ -639,14 +787,8 @@ body {
   font-weight: bold;
   letter-spacing: 0.125em;
   color: rgba(238, 238, 238, 0.815);
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-name: textflicker;
-          animation-name: textflicker;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 1s textflicker infinite normal;
+          animation: 1s textflicker infinite normal;
 }
 
 .contactdescription a::before {
@@ -663,14 +805,9 @@ body {
   transform-origin: right top;
   transition: transform 0.3s;
   z-index: -1;
-  -webkit-animation-duration: 0.01s;
-          animation-duration: 0.01s;
-  -webkit-animation-name: textblinking;
-          animation-name: textblinking;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
+  -webkit-animation: 0.01s textblinking infinite normal;
+          animation: 0.01s textblinking infinite normal;
+  will-change: opacity;
 }
 
 .contactdescription a:hover {
