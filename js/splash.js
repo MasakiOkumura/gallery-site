@@ -1,6 +1,6 @@
-setTimeout(function(){
-    $('#splash').addClass('loaded');
-}, 8100);
+// setTimeout(function(){
+//     $('#splash').addClass('loaded');
+// }, 8100);
 
 $(function(){
     const loadingBox = document.getElementById('loadingbox');
@@ -18,7 +18,10 @@ $(function(){
     });
     // ローディングアニメーション終了時2.1秒待って要素を削除する
     loadingBox.addEventListener('animationend', () => {
-        setTimeout(function(){loadingBox.style.display = 'none';}, 3100);
+        setTimeout(function(){
+            loadingBox.style.display = 'none';
+            $('#splash').addClass('loaded');
+        }, 1100);
         
     });
 });

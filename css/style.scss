@@ -180,7 +180,7 @@ body {
 }
 
 #splash.loaded {
-    animation: .05s loaded forwards linear;
+    animation: .1s loaded forwards linear;
     will-change: transform, opacity, visibility;
 }
 
@@ -200,7 +200,6 @@ body {
     visibility: hidden;
     position: relative;
     top: 25%;
-    background-color: $uiback-color;
     padding: 30px;
 }
 
@@ -273,8 +272,11 @@ body {
     width: 50px;
     height: 50px;
     letter-spacing: $ShareTechMono-l-spacing;
-    animation: 1.2s crossflicker infinite alternate;
+    animation: .9s crossflicker infinite alternate;
     will-change: filter;
+}
+.cross-splashscreen:not(:last-child) {
+    margin-right: 50px;
 }
 
 /*********************************
@@ -392,6 +394,7 @@ body {
     margin-left: 50px;
     border: 1px solid $main-color;
     border-left: 400px solid $main-color;
+    border-right: 100px solid $main-color;
 }
 
 .nav-list {
