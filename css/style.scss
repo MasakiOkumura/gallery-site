@@ -1,8 +1,15 @@
-$main-color: rgba(238, 238, 238, 0.815);
-$text-background-color: rgb(23, 180, 154);
-$glitchshadow-color1: #00fff283;
+$main-color: rgb(0, 0, 0);
+// $main-color: rgba(238, 238, 238, 0.815);
+$text-background-color: #ff5e00;
+// $text-background-color: #6200ff8c;
+// $text-background-color: rgb(23, 180, 154);
+$glitchshadow-color1: #e5ff0083;
 $glitchshadow-color2: #ff003783;
 $ShareTechMono-l-spacing: 0.125em;
+$uiback-color: rgba(255, 255, 255, 0.7);
+// $uiback-color: rgba(44, 44, 44, 0.7);
+$back-color: rgb(153, 153, 153);
+// $back-color: #111;
 
 @font-face {
     font-family: 'ShareTechMono';
@@ -14,17 +21,63 @@ $ShareTechMono-l-spacing: 0.125em;
     letter-spacing: 0.125em;
     src:  url(../fonts/UDEVGothic-Regular.ttf) format('truetype');
 }
+@font-face {
+    font-family: 'DotGothic16-Regular';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/DotGothic16-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'JosefinSans-BoldItalic';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/JosefinSans-BoldItalic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Limelight-Regular';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/Limelight-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Monoton-Regular.ttf';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/Monoton-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Oswald-VariableFont_wght';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/Oswald-VariableFont_wght.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'PlayfairDisplay-VariableFont_wght';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/PlayfairDisplay-VariableFont_wght.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'QwitcherGrypen-Regular';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/QwitcherGrypen-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'RampartOne-Regular';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/RampartOne-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'UncialAntiqua-Regular';
+    letter-spacing: 0.125em;
+    src:  url(../fonts/UncialAntiqua-Regular.ttf) format('truetype');
+}
+
 html { 
-    background: #111;
+    background: $back-color;
     padding: 1em;
     color: $main-color;
     font-family: ShareTechMono;
-    background-image: url(../img/grid.png);
+    // background-image: url(../img/grid.png);
     background-position: center;
 }
 
 header {
-    background-color: rgba(44, 44, 44, 0.7);
+    background-color: $uiback-color;
     margin-bottom: 70px;
 }
 
@@ -51,11 +104,58 @@ body {
     SPLASH SCREEN
 *********************************/
 
+.changingchar {
+    margin: auto;
+    font-size: 15px;
+    width: 75px;
+    color: $back-color;
+    background-color: white;
+    text-align: center;
+    animation: 1s changing infinite linear, .1s commandflicker infinite normal;
+}
+@keyframes changing {
+    0% {
+        font-family: 'ShareTechMono';
+    }
+    10% {
+        font-family: 'Oswald-VariableFont_wght';
+    }
+    20% {
+        font-family: 'UDEVGothic';
+    }
+    30% {
+        font-family: 'PlayfairDisplay-VariableFont_wght';
+    }
+    40% {
+        font-family: 'DotGothic16-Regular';
+    }
+    50% {
+        font-family: 'RampartOne-Regular';
+    }
+    60% {
+        font-family: 'JosefinSans-BoldItalic';
+    }
+    70% {
+        font-family: 'QwitcherGrypen-Regular';
+    }
+    80% {
+        font-family: 'Limelight-Regular';
+    }
+    90% {
+        font-family: 'UncialAntiqua-Regular';
+    }
+    100% {
+        font-family: 'Monoton-Regular.ttf';
+    }
+}
+
+
 .commandstyle {
     color: $main-color;
     font-size: 1rem;
     letter-spacing: .3em;
     animation: .1s commandflicker infinite normal;
+    will-change: text-shadow;
 }
 
 @keyframes commandflicker {
@@ -72,7 +172,7 @@ body {
     top: 0;
     left: 0;
     z-index: 9999;
-    background-color: #111;
+    background-color: $back-color;
     width: 100%;
     height: 100%;
     opacity: 1;
@@ -80,7 +180,7 @@ body {
 }
 
 #splash.loaded {
-    animation: .5s loaded forwards linear;
+    animation: .05s loaded forwards linear;
     will-change: transform, opacity, visibility;
 }
 
@@ -97,16 +197,17 @@ body {
 }
 
 #loading {
+    visibility: hidden;
     position: relative;
     top: 25%;
-    background-color: rgba(44, 44, 44, 0.7);
+    background-color: $uiback-color;
     padding: 30px;
 }
 
 #loadingbox {    
     visibility: hidden;
-    --x-gradient: linear-gradient(90deg, rgb(238, 238, 238) 0 10px, transparent 0 calc(100% - 10px), rgb(238, 238, 238) calc(100% - 10px));
-    --y-gradient: linear-gradient(rgb(238, 238, 238) 0 7px, transparent 0 calc(100% - 7px), rgb(238, 238, 238) calc(100% - 7px));
+    --x-gradient: linear-gradient(90deg, rgb(0, 0, 0) 0 10px, transparent 0 calc(100% - 10px), rgb(0, 0, 0) calc(100% - 10px));
+    --y-gradient: linear-gradient(rgb(0, 0, 0) 0 7px, transparent 0 calc(100% - 7px), rgb(0, 0, 0) calc(100% - 7px));
     width: 50%;
     margin: 0 auto;
     padding: 20px;
@@ -158,6 +259,24 @@ body {
     }
 }
 
+.loading-divider {
+    display: flex;
+    justify-content: center;
+    background-color: $uiback-color;
+    margin: 20px auto 0 auto;
+    width: 50%;
+}
+
+.cross-splashscreen {
+    padding: 1em;
+    color: $main-color;
+    width: 50px;
+    height: 50px;
+    letter-spacing: $ShareTechMono-l-spacing;
+    animation: 1.2s crossflicker infinite alternate;
+    will-change: filter;
+}
+
 /*********************************
 	コンテンツ
 *********************************/
@@ -175,8 +294,9 @@ body {
 .flex-divider {
     display: flex;
     justify-content: center;
-    background-color: rgba(44, 44, 44, 0.7);
-    margin: 30px 600px;
+    background-color: $uiback-color;
+    width: 250px;
+    margin: 30px auto;
 }
 
 .footer {
@@ -316,7 +436,7 @@ body {
 }
 
 .nav-item a:hover {
-    color: #111;
+    color: $back-color;
     background-color: $glitchshadow-color1;
 }
 
@@ -326,8 +446,8 @@ body {
 }
 
 .glitchbox {
-    --x-gradient: linear-gradient(90deg, rgb(238, 238, 238) 0 10px, transparent 0 calc(100% - 10px), rgb(238, 238, 238) calc(100% - 10px));
-    --y-gradient: linear-gradient(rgb(238, 238, 238) 0 7px, transparent 0 calc(100% - 7px), rgb(238, 238, 238) calc(100% - 7px));
+    --x-gradient: linear-gradient(90deg, rgb(0, 0, 0) 0 10px, transparent 0 calc(100% - 10px), rgb(0, 0, 0) calc(100% - 10px));
+    --y-gradient: linear-gradient(rgb(0, 0, 0) 0 7px, transparent 0 calc(100% - 7px), rgb(0, 0, 0) calc(100% - 7px));
     margin: 0.5rem;
     padding: 1em;
     width: 300px;
@@ -397,6 +517,7 @@ body {
     animation: 1.2s crossflicker infinite alternate;
     will-change: filter;
 }
+
 @keyframes crossflicker {
     0% {
         filter: drop-shadow(1px 0 0 $glitchshadow-color1) drop-shadow(-2px 0 0 $glitchshadow-color2);
@@ -438,14 +559,11 @@ body {
 }
 
 .panel {
-    background-color: #111;
+    background-color: $uiback-color;
     margin: 8px;
     margin-top: 30px;
-    padding: 10px;
-    border: 1px solid $main-color;
-    border-top: 30px solid $main-color;
-    animation: 0.1s objectflicker infinite normal;
-    will-change: box-shadow;
+    padding: 60px 110px;
+    border-top: 10px solid $main-color;
 }
 
 @keyframes objectflicker {
@@ -484,40 +602,37 @@ body {
     }
 }
 .profile {
-    margin: 50px 100px;
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .profileimage{
-    display: inline-block;
+    margin-bottom: 10px;
     padding: 20px;
-    margin-right: 50px;
     border: 1px solid $main-color;
-    border-top: 10px solid $main-color;
 }
 
-.myface {
-    width: 300px;
-    height: 300px;
-    border: 1px solid $main-color;
-    box-shadow: 2.5px 2.5px 1px $glitchshadow-color1, -2.5px -2.5px 0 $glitchshadow-color2;
+.profileimage img {
+    vertical-align: top;
+    object-fit: cover;
+    width: 100%;
+    height: 150px;
 }
 
 .minititle {
+    letter-spacing: $ShareTechMono-l-spacing;
+    font-weight: bold;
     border-right: 100px solid $main-color;
     border-left: 10px solid $main-color;
     padding-left: 10px;
     margin-bottom: 17.5px;
     background-color: $text-background-color;
-    text-shadow: 3px 0.5px 1px $glitchshadow-color1, -2px -0.5px 1px $glitchshadow-color2;
-    box-shadow: 3px 0.5px 1px $glitchshadow-color1, -2px -0.5px 1px $glitchshadow-color2;
 }
 
 .profiletext {
     font-family: UDEVGothic;
     letter-spacing: $ShareTechMono-l-spacing;
-    text-shadow: 0 0 3px $main-color;
 }
 
 .infomation {
@@ -532,10 +647,10 @@ body {
 }
 
 .description {
-    margin-top: 17.5px;
+    margin-top: 10px;
     padding: 15px;
     border: 1px solid $main-color;
-    border-top: 30px solid $main-color;
+    // border-top: 30px solid $main-color;
     font-size: 15px;
 }
 
@@ -547,9 +662,7 @@ body {
 }
 
 .skill {
-    margin: 50px 100px;
-    // display: flex;
-    // justify-content: left;
+    // margin: 50px 100px;
 }
 
 .skillname{
@@ -557,8 +670,6 @@ body {
     border-left: 10px solid $main-color;
     padding-left: 10px;
     background-color: $text-background-color;
-    text-shadow: 3px 0.5px 1px $glitchshadow-color1, -2px -0.5px 1px $glitchshadow-color2;
-    box-shadow: 3px 0.5px 1px $glitchshadow-color1, -2px -0.5px 1px 
 }
 
 .skillname span {
@@ -578,7 +689,6 @@ body {
     border-bottom: 1px solid $main-color;
     font-size: 15px;
     letter-spacing: $ShareTechMono-l-spacing;
-    text-shadow: 0 0 3px $main-color;
 }
 
 .contact {
@@ -622,7 +732,7 @@ body {
 }
 
 .contactdescription a:hover {
-    color: #111;
+    color: $back-color;
     background-color: $glitchshadow-color1;
 }
 
